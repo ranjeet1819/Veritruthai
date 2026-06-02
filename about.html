@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - TrueSource Forensic Portal</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a; 
+            --bg-secondary: #1e293b;
+            --accent: #38bdf8; 
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8; 
+            --border: #334155;
+            --success: #10b981;
+        }
+        
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        
+        body { 
+            background-color: var(--bg-primary); 
+            color: var(--text-main); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+        /* Navigation Bar */
+        nav { 
+            background: var(--bg-secondary); 
+            border-bottom: 1px solid var(--border); 
+            padding: 1rem 2rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap;
+        }
+        
+        nav .logo { 
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            color: var(--accent); 
+            text-decoration: none; 
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        nav .nav-links { 
+            display: flex; 
+            gap: 1.5rem; 
+            list-style: none; 
+        }
+        
+        nav .nav-links a { 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            font-weight: 500; 
+            transition: color 0.3s;
+        }
+        
+        nav .nav-links a:hover, nav .nav-links a.active { 
+            color: var(--text-main); 
+        }
+
+        /* Main Container */
+        .content-section { 
+            max-width: 1100px; 
+            margin: 3rem auto; 
+            padding: 0 1.5rem; 
+            width: 100%;
+        }
+        
+        .section-title {
+            color: var(--accent); 
+            margin-bottom: 1.5rem; 
+            font-size: 2.2rem; 
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+        
+        .content-section p.intro-text { 
+            color: var(--text-muted); 
+            line-height: 1.8; 
+            margin-bottom: 2rem; 
+            font-size: 1.15rem; 
+        }
+        
+        /* Technical Core Features Grid */
+        .features-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 1.5rem; 
+            margin-bottom: 4rem; 
+        }
+        
+        .core-card { 
+            background: var(--bg-secondary); 
+            border: 1px solid var(--border); 
+            padding: 2rem; 
+            border-radius: 10px; 
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        
+        .core-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        
+        .core-card h3 { 
+            color: #fff; 
+            margin-bottom: 0.75rem; 
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .core-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Team Section Layout */
+        .team-heading {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .team-card {
+            background: linear-gradient(145deg, #1e293b, #111827);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.15);
+        }
+
+        .member-avatar {
+            width: 70px;
+            height: 70px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .team-card h4 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-card .role {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .team-card .desc {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+            }
+            .section-title {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 1.5rem; 
+            color: var(--text-muted); 
+            border-top: 1px solid var(--border); 
+            margin-top: auto; 
+            font-size: 0.85rem; 
+            background: var(--bg-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">🛡️ TrueSource</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="content-section">
+        
+        <h2 class="section-title">About TrueSource Project</h2>
+        <p class="intro-text">
+            TrueSource is an enterprise-grade multi-modal forensic architecture explicitly conceptualized to target and mitigate the algorithmic threats of digital manipulation, automated fake documentation, and highly structural deepfakes. Developed as a Capstone-II project at the Indian Institute of Technology Patna, this unified system addresses the critical challenge of verification in the age of pervasive Generative AI.
+        </p>
+        
+        <div class="features-grid">
+            <div class="core-card">
+                <h3>👁️ Vision Forensics</h3>
+                <p>Driven by MTCNN face detection layers coupled with EfficientNet-V2 architectures. This module processes static media streams and long-form video frame samplings to detect high-frequency compression inconsistencies and facial artifact splicing anomalies with up to 96.4% precision.</p>
+            </div>
+            <div class="core-card">
+                <h3>✍️ NLP Text Evaluation</h3>
+                <p>Powered by fine-tuned RoBERTa-base layers checking perplexity variations and length burstiness patterns inside unstructured articles. It automatically distinguishes natural human literary flows from AI-generated textual fragments.</p>
+            </div>
+            <div class="core-card">
+                <h3>⚡ MLOps Integration & Deployment</h3>
+                <p>Built over an asynchronous FastAPI architecture capable of running concurrent non-blocking worker pools. The entire environment is containerized using Docker and securely hosted via live cloud environments for efficient scale and performance access logs.</p>
+            </div>
+        </div>
+
+        <h3 class="team-heading">Our Forensic Project Team (Group 57)</h3>
+        
+        <div class="team-grid">
+            
+            <div class="team-card">
+                <div class="member-avatar">RK</div>
+                <h4>Ranjeet Kumar</h4>
+                <div class="role">Full-Stack & MLOps Lead</div>
+                <p class="desc">Architected the core FastAPI backend, developed secure token logins, connected multi-modal APIs, and completed production deployment.</p>
+            </div>
+
+            <div class="team-card">
+                <div class="member-avatar">RJ</div>
+                <h4>Rajeev</h4>
+                <div class="role">Vision Specialist</div>
+                <p class="desc">Engineered the Deepfake verification framework, curated training datasets, and fine-tuned visual binary classifiers.</p>
+            </div>
+
+            <div class="team-card">
+                <div class="member-avatar">RN</div>
+                <h4>Rajnish</h4>
+                <div class="role">NLP Specialist</div>
+                <p class="desc">Optimized the transformers library parameters, text parsing regex layers, and burstiness computing math logics.</p>
+            </div>
+
+            <div class="team-card">
+                <div class="member-avatar">RA</div>
+                <h4>Raju</h4>
+                <div class="role">UI/UX Developer</div>
+                <p class="desc">Designed the interactive React dashboard layouts, custom data tables, and dynamic front-end state configurations.</p>
+            </div>
+
+            <div class="team-card">
+                <div class="member-avatar">RK</div>
+                <h4>RK</h4>
+                <div class="role">XAI & Data Lead</div>
+                <p class="desc">Implemented Grad-CAM spatial heatmaps for pixel level interpretability and handled pipeline validation testing.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        TrueSource • Hybrid UG Program in CS & Data Analytics, IIT Patna
+    </footer>
+
+</body>
+</html>

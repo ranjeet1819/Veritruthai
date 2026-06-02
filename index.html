@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrueSource - Advanced Multi-Modal Forensics Platform</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a; 
+            --bg-secondary: #1e293b;
+            --accent: #38bdf8; 
+            --accent-hover: #0ea5e9;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8; 
+            --border: #334155;
+            --danger: #ef4444; 
+            --success: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        
+        body { 
+            background-color: var(--bg-primary); 
+            color: var(--text-main); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+        /* Responsive Navigation Bar */
+        nav { 
+            background: var(--bg-secondary); 
+            border-bottom: 1px solid var(--border); 
+            padding: 1rem 2rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav .logo { 
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            color: var(--accent); 
+            text-decoration: none; 
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        nav .nav-links { 
+            display: flex; 
+            gap: 1.5rem; 
+            list-style: none; 
+            align-items: center;
+        }
+        
+        nav .nav-links a { 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        nav .nav-links a:hover, nav .nav-links a.active { 
+            color: var(--text-main); 
+        }
+
+        .btn-auth { 
+            background: var(--accent); 
+            color: var(--bg-primary); 
+            padding: 0.5rem 1.2rem; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            text-decoration: none; 
+            transition: 0.3s; 
+        }
+        .btn-auth:hover { background: var(--accent-hover); box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+        
+        /* Hero Section */
+        .hero { 
+            max-width: 900px; 
+            margin: 5rem auto 4rem auto; 
+            text-align: center; 
+            padding: 0 1.5rem; 
+        }
+        
+        .hero h1 { 
+            font-size: 3.5rem; 
+            margin-bottom: 1.5rem; 
+            color: #fff; 
+            line-height: 1.2; 
+            letter-spacing: -0.02em;
+        }
+        
+        .hero h1 span { color: var(--accent); }
+        .hero p { color: var(--text-muted); font-size: 1.25rem; margin-bottom: 2.5rem; line-height: 1.6; }
+
+        /* Main Detailed Sections Container */
+        .main-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 1.5rem 5rem 1.5rem;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        .section-heading span { color: var(--accent); }
+
+        /* SECTION 1: HOW IT WORKS FLOATING CARDS */
+        .workflow-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .workflow-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+        }
+        .workflow-card .step-num {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--bg-primary);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .workflow-card h3 { color: #fff; margin: 0.75rem 0; font-size: 1.2rem; }
+        .workflow-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+
+        /* SECTION 2: ARCHITECTURE SPECIFICATIONS */
+        .tech-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+        .tech-box {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        .tech-box h3 { color: var(--accent); margin-bottom: 1rem; font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem; }
+        .tech-box ul { list-style: none; }
+        .tech-box ul li { color: var(--text-muted); margin-bottom: 0.75rem; font-size: 0.95rem; line-height: 1.5; display: flex; align-items: flex-start; gap: 0.5rem; }
+        .tech-box ul li::before { content: "✔"; color: var(--accent); font-weight: bold; }
+
+        /* SECTION 3: PLATFORM BENEFITS */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .benefit-card {
+            border: 1px solid var(--border);
+            background: rgba(30, 41, 59, 0.3);
+            padding: 1.75rem;
+            border-radius: 10px;
+            display: flex;
+            gap: 1rem;
+        }
+        .benefit-icon { font-size: 2rem; line-height: 1; }
+        .benefit-info h4 { color: #fff; margin-bottom: 0.5rem; font-size: 1.15rem; }
+        .benefit-info p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+
+        /* Mobile View Optimization */
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 1rem; text-align: center; padding: 1rem; }
+            nav .nav-links { flex-direction: column; gap: 0.75rem; }
+            .hero h1 { font-size: 2.3rem; }
+            .hero p { font-size: 1.1rem; }
+            .tech-showcase { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 2rem; 
+            color: var(--text-muted); 
+            border-top: 1px solid var(--border); 
+            font-size: 0.85rem; 
+            background: var(--bg-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">🛡️ TrueSource</a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About Team</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="auth.html" class="btn-auth" style="color: var(--bg-primary);">Console Gateway</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h1>Unified Engine for Multi-Modal <span>Deepfake Detection</span></h1>
+        <p>Protecting information integrity at scale. Instantly verify digital media authenticity and flag malicious AI-generated texts using state-of-the-art multi-layered neural network forensics.</p>
+        <a href="auth.html" class="btn-auth" style="padding: 1rem 2.5rem; font-size: 1.1rem; border-radius: 8px;">Launch Investigator Console</a>
+    </div>
+
+    <div class="main-content">
+        
+        <h2 class="section-heading">How TrueSource <span>Verifies Integrity</span></h2>
+        <div class="workflow-container">
+            <div class="workflow-card">
+                <div class="step-num">1</div>
+                <h3>Data Ingestion</h3>
+                <p>Users stream plain texts, text files, static images, or high-definition videos into our secure asynchronous upload gateway nodes.</p>
+            </div>
+            <div class="workflow-card">
+                <div class="step-num">2</div>
+                <h3>Neural Extraction</h3>
+                <p>The backend routes the files into isolated execution channels—extracting facial pixel grids via MTCNN or text tokens via NLP regex filters.</p>
+            </div>
+            <div class="workflow-card">
+                <div class="step-num">3</div>
+                <h3>Deep Learning Scoring</h3>
+                <p>Our fine-tuned classifiers (EfficientNet-V2, RoBERTa) map anomalies, compression limits, and rPPG dermal blood waves to calculate a Trust Score.</p>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Core Forensic <span>Backbone Technologies</span></h2>
+        <div class="tech-showcase">
+            <div class="tech-box">
+                <h3>🖼️ Media Forensics Stack</h3>
+                <ul>
+                    <li><strong>MTCNN Face Alignment:</strong> Automatically locates, clips, and normalizes specific facial structures across frames to isolate evaluation fields.</li>
+                    <li><strong>EfficientNet-V2 Classifier:</strong> Analyzes blended boundary edges and localized fake pixel distortions with 96.4% verified accuracy.</li>
+                    <li><strong>rPPG Heartbeat Monitor:</strong> Tracks sub-visual dermal skin color periodicities to prove biological life and flag non-human blood flow waves.</li>
+                </ul>
+            </div>
+            <div class="tech-box">
+                <h3>📄 NLP Synthetic Text Stack</h3>
+                <ul>
+                    <li><strong>RoBERTa-Base Model:</strong> Trained over massive synthetic corpuses to detect structural tokens matching OpenAI or LLM generation footprints.</li>
+                    <li><strong>Perplexity Metric Analysis:</strong> Computes the mathematical probability weight of word choices to find out if the text flow is too predictable.</li>
+                    <li><strong>Burstiness Variance Mapping:</strong> Measures sentence length consistency, automatically flagging flat-line non-human sentence layouts.</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Key Advantages & <span>System Benefits</span></h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🚀</div>
+                <div class="benefit-info">
+                    <h4>Asynchronous Speed</h4>
+                    <p>Powered by non-blocking FastAPI worker loops, ensuring heavy video file frame samplings are done without slowing down frontend connections.</p>
+                </div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🛡️</div>
+                <div class="benefit-info">
+                    <h4>Enterprise Gateway Security</h4>
+                    <p>Protects system routes and logs through industrial JWT security standards, creating isolated session spaces for operators.</p>
+                </div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">☁️</div>
+                <div class="benefit-info">
+                    <h4>Production Ready Deployment</h4>
+                    <p>Completely containerized via Docker configurations and ready to scale over cloud hosting architectures (AWS EC2) with reverse proxies.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        TrueSource Engine • Final Capstone Presentation Project Cluster • Indian Institute of Technology Patna
+    </footer>
+
+</body>
+</html>
