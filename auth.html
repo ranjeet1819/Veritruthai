@@ -191,7 +191,8 @@
     </div>
 
     <script>
-        const DATABASE_API_URL = "http://127.0.0.1:8000"; // Replace with live production domain when available
+        // 🌐 LIVE RENDER CENTRAL GATEWAY URL
+        const BASE_API_URL = "https://veritruthai.onrender.com"; 
 
         // Tab Switching Mechanism
         function toggleAuth(isSignUp) {
@@ -247,7 +248,8 @@
             networkPayload.append('password', document.getElementById('loginPassword').value);
 
             try {
-                const response = await fetch(`${DATABASE_API_URL}/token`, {
+                // हिटिंग लाइव रेंडर टोकन एंडपॉइंट
+                const response = await fetch(`${BASE_API_URL}/token`, {
                     method: 'POST',
                     body: networkPayload
                 });
@@ -262,11 +264,8 @@
                     displayAlert('loginAlert', errorDetail.detail || "Access Denied: Invalid credentials parameters.", "error");
                 }
             } catch (err) {
-                console.warn("Local cluster instance offline, applying presentation sandbox loop:", err);
-                
-                // Fallback staging presentation bypass loops if server is disconnected during local grading loops:
-                localStorage.setItem('access_token', "sandbox-presentation-jwt-token");
-                window.location.href = 'dashboard.html';
+                console.warn("Live Server handshake failed:", err);
+                displayAlert('loginAlert', "Network Error: Could not establish active link with Render Server.", "error");
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Sign In to Dashboard";
@@ -291,7 +290,8 @@
             };
 
             try {
-                const response = await fetch(`${DATABASE_API_URL}/api/register`, {
+                // हिटिंग लाइव रेंडर रजिस्ट्रेशन एंडपॉइंट
+                const response = await fetch(`${BASE_API_URL}/api/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userJsonPayload)
