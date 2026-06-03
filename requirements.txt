@@ -4,4 +4,4 @@ pymongo
 bcrypt
 pyjwt
 pydantic
-multipart
+python-multipart
